@@ -145,7 +145,7 @@ def USR_confirmCommonWord(word):
 
 #11 =>  [S]tart processing from scratch or [R]esume processing
 def USR_StartResume():
-    prompt = 'Do you want to start the process from: \n scratch: [S]? \n or or you want to:\n [R]esume last processing?'
+    prompt = 'Do you want to start the process from: scratch: [S]? or or you want to: [R]esume last processing?\n=>'
     userResp = input(prompt)
     return userResp
 
@@ -251,7 +251,7 @@ def USR_rescueCNPJ(ciaName):
 
       
         
-print(f"\n===FixInc Module=> <User Interaction Routines 20230804-v3A>")
+print(f"\n===FixInc Module=> <User Interaction Routines 20230912-v3B>")
 
 
 # In[ ]:

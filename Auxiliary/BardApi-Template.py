@@ -37,7 +37,7 @@ import sys
 #     install_module(module_name)
 #
 from bardapi import Bard
-myToken = 'ZAh5YWaPE7QLc9Ymhbp8dxbv1QjnQKEeWs5RchFY4qMuiF3iWaJLyDIWUQzfRINEXghK0g.'
+myToken = 'awh5YWTO8IrYw-mmk3qAFGi6T6X_XUo27w4b44wNu_T3gCzDOXyqzOdtBksLWj5O4mQu1A.'
 bard = Bard(token = myToken)
 response = bard.get_answer("Tell me About this Brazilian Company: 'Desktop Sigmanet Comunicação Multimidia'")
 print(response)
