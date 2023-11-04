@@ -32,7 +32,7 @@ openai.api_key = GPT_keyAPI
 print(f"\n=== FixInc #B-1: <Ouverture Session chatGPT> exec@: {date_stamp()}")
 
 
-# chatGTP #B-1 : Single Test on About Company
+# chatGTP #B-1 : Single Test on about Company
 
 
 queryContent = "content"

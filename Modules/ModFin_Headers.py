@@ -25,7 +25,7 @@ print(f"\n=== Cell A-0 <Définitions préliminaires> Executed")
 ## 02: hdrSec_CVM_CSV. hdrSec_CVM_CSV_Record, hdrSec_CVM_CSV_len => AppRFsource file transformed in a csv database
 ## 03: hdrSec_XP,hdrSec_XP_Record,hdrSec_XP_len => Source XP manually grabbed from HTML page
 ## 04: hdrSec_XP_Offer, hdrSec_XP_Offer_Record, hdrSec_XP_Offer_len => XP Primary  UI Market HTML extraction
-## 05: hdrCia_CVM, hdrCia_CVM_Record, hdrCia_CVM_len => dictionnary of  CVM CiaName normalized,rough
+## 05: hdrCia_CVM, hdrCia_CVM_Record, hdrCia_CVM_len => dictionnary of  CVM cia_name normalized,rough
 ## 06: hdrCia_MoodysRate, hdrCia_MoodysRate_Record, hdrCia_MoodysRate_len => Moodys Rating stuff
 ## 07: hdrCia_CVM, hdrCia_CVM_Record, hdrCia_CVM_len => extracted/edited from CVM HTML page
 ## 08: hdrImpCia, hdrImpCia_Record, hdrImp_Record_len
@@ -78,7 +78,7 @@ hdrSec_CVM_CSV_cvmCiaCode = '25224'
 hdrSec_CVM_CSV_cvmRegistered = '29/10/2020'
 hdrSec_CVM_CSV_neo4jStored = 'FALSE'
 
-hdrSec_CVM_CSV = ['CiaCode','CiaCNPPJ','CiaName', 'SubIndustryCode', 'SectorCode', 'InternalCode' 'Region', 'Sym6C','Fitch', 'SP', 'Moody', 'Group', 'About', 'cvmCiaName', 'cvmCiaStatus' 'cvmCiaCode', 'cvmRegistered', 'neo4jStored']
+hdrSec_CVM_CSV = ['CiaCode','CiaCNPPJ','cia_name', 'SubIndustryCode', 'SectorCode', 'InternalCode' 'Region', 'Sym6C','Fitch', 'SP', 'Moody', 'Group', 'about', 'cvmCiaName', 'cvmCiaStatus' 'cvmCiaCode', 'cvmRegistered', 'neo4jStored']
 hdrSec_CVM_CSV_len = len(hdrSec_CVM_CSV)
 
 hdrSec_CVM_CSV_Record = [hdrSec_CVM_CSV_CiaCode,hdrSec_CVM_CSV_CiaCNPPJ,hdrSec_CVM_CSV_CiaName, hdrSec_CVM_CSV_SubIndustryCode, hdrSec_CVM_CSV_SectorCode, hdrSec_CVM_CSV_InternalCode, hdrSec_CVM_CSV_Region, hdrSec_CVM_CSV_Sym6C,hdrSec_CVM_CSV_Fitch,hdrSec_CVM_CSV_SP, hdrSec_CVM_CSV_Moody, hdrSec_CVM_CSV_Group, hdrSec_CVM_CSV_About, hdrSec_CVM_CSV_cvmCiaName, hdrSec_CVM_CSV_cvmCiaStatus, hdrSec_CVM_CSV_cvmCiaCode, hdrSec_CVM_CSV_cvmRegistered, hdrSec_CVM_CSV_neo4jStored]
@@ -98,7 +98,7 @@ hdrSec_XP_RiskXP = '2'
 hdrSec_XP_MinInv = '1000'
 hdrSec_XP_KeyUniq = '##DEB#1.01#%DI#Aliansce Sonae Shopping Center#2023-4-5##'
 
-hdrSec_XP = ['CiaCode','CiaName','Category','SecCode','ExpireDate','Index','Premium', 'Liquidity','RiskRate',                 'Rater','RiskXP', 'MinInv','KeyUniq']
+hdrSec_XP = ['CiaCode','cia_name','Category','SecCode','ExpireDate','Index','Premium', 'Liquidity','RiskRate',                 'Rater','RiskXP', 'MinInv','KeyUniq']
 hdrSec_XP_len = len(hdrSec_XP)
 
 hdrSec_XP_Record = [hdrSec_XP_CiaCode,hdrSec_XP_CiaName,hdrSec_XP_Category,hdrSec_XP_SecCode, hdrSec_XP_ExpireDate, hdrSec_XP_Index,hdrSec_XP_Premium, hdrSec_XP_Liquidity, hdrSec_XP_RiskRate,hdrSec_XP_Rater,hdrSec_XP_RiskXP, hdrSec_XP_MinInv,hdrSec_XP_KeyUniq]
@@ -156,7 +156,7 @@ hdrCia_CVM_CiaStatus = 'Open'
 hdrCia_CVM_CVM = '25224'
 hdrCia_CVM_Registered = '29/10/2020'
 
-hdrCia_CVM = ['CiaName', 'CNPJ', 'CiaStatus', 'CVM', 'Registered']
+hdrCia_CVM = ['cia_name', 'CNPJ', 'CiaStatus', 'CVM', 'Registered']
 hdrCia_CVM_len = len(hdrCia_CVM)
 
 hdrCia_CVM_Record = [hdrCia_CVM_CiaName, hdrCia_CVM_NPJ, hdrCia_CVM_CiaStatus, hdrCia_CVM_CVM, hdrCia_CVM_Registered]
@@ -177,10 +177,10 @@ hdrImpMoody = '#X#'
 hdrImpGroup = '#X#'
 hdrImpAbout = '3R Petroleum Oleo & Gas is a Brazilian oil and gas company that operates in the...'
 
-hdrImpCia = ['CiaCode','CiaCNPJ', 'CiaName', 'SubIndustryCode', 'IndustryCode', 'SectorCode', 'InternalCode', 'Region', 'Sym6C', 'Fitch', 'SP' ,'Moody', 'Group', 'About']
+hdrImpCia = ['CiaCode','CiaCNPJ', 'cia_name', 'SubIndustryCode', 'IndustryCode', 'SectorCode', 'InternalCode', 'Region', 'Sym6C', 'Fitch', 'SP' ,'Moody', 'Group', 'about']
 hdrImpCia_Record = [hdrImpCiaCode, hdrImpCiaCNPJ, hdrImpCiaName, hdrImpSubIndustryCode, hdrImpIndustryCode, hdrImpSectorCode, hdrImpInternalCode, hdrImpRegion, hdrImpSym6C, hdrImpFitch, hdrImpSP ,hdrImpMoody, hdrImpGroup, hdrImpAbout]
 hdrImpCia_Record_len = len(hdrImpCia_Record)
-# print(f"\n Neo4j Company Import Header: {hdrImpCia}; has {hdrImpCia_Record_len} items ; sample Record: \n\n {hdrImpCia_Record}")
+# print(f"\n Neo4j Company Import header: {hdrImpCia}; has {hdrImpCia_Record_len} items ; sample Record: \n\n {hdrImpCia_Record}")
 
 ##hdr 09 hdrV1ImpCia, hdrV1ImpCia_Record, hdrV1Imp_Record_len
 hdrV1ImpCiaCNPJ = '08.773.135/0001-00'
@@ -196,10 +196,10 @@ hdrV1ImpGroup = '#X#'
 hdrV1ImpAbout = '3R Petroleum Oleo & Gas is a Brazilian oil and gas company that operates in the...'
 
 
-hdrV1ImpCia = ['CiaCNPJ', 'CiaName', 'SubIndustryCode', 'IndustryCode', 'SectorCode', 'Region', 'Fitch', 'SP' ,'Moody', 'Group', 'About']
+hdrV1ImpCia = ['CiaCNPJ', 'cia_name', 'SubIndustryCode', 'IndustryCode', 'SectorCode', 'Region', 'Fitch', 'SP' ,'Moody', 'Group', 'about']
 hdrV1ImpCia_Record = [hdrV1ImpCiaCNPJ, hdrV1ImpCiaName, hdrV1ImpSubIndustryCode, hdrV1ImpIndustryCode,hdrV1ImpSectorCode, hdrV1ImpRegion, hdrV1ImpFitch, hdrV1ImpSP ,hdrV1ImpMoody, hdrV1ImpGroup, hdrV1ImpAbout]
 hdrV1ImpCia_Record_len = len(hdrV1ImpCia_Record)
-# print(f"\n Neo4j Cia V1 Import Header: {hdrV1ImpCia} has <{hdrV1ImpCia_Record_len}> items ; sample:\n\n {hdrV1ImpCia_Record}")
+# print(f"\n Neo4j Cia V1 Import header: {hdrV1ImpCia} has <{hdrV1ImpCia_Record_len}> items ; sample:\n\n {hdrV1ImpCia_Record}")
 
 print(f"\n===FixInc Module=> <Headers Definitions 20230804-v2>")
 

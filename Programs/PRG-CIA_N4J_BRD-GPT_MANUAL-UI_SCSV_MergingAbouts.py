@@ -4,13 +4,13 @@
 
 
 ### ROB-SET_GPT-BRD_MergeAbouts BEGINS HERE
-# This routine Merges AboutGPT with About Bard in order to create one single about
+# This routine Merges AboutGPT with about Bard in order to create one single about
 # It works with the latest file N4J-CIA_SCSV_AboutIndustryRecords
 # which has 12 column format (two Abouts),: namely:
-# CiaCNPJ;CiaName;SubIndustryCode;IndustryCode;SectorCode;Region;Fitch;SP;Moody;Group;
-# About;aboutBRD
+# CiaCNPJ;cia_name;SubIndustryCode;IndustryCode;SectorCode;Region;Fitch;SP;Moody;Group;
+# about;aboutBRD
 # This routine version v.1 just concatenate the two abouts if they are meaningful, discarding platitudes.
-# For that it will use cleaning filters: (1) BRD_FilterPlatitudes(about) and (2) GPT_cleanAbout(reply)
+# For that it will use cleaning filters: (1) brd_filter_platitudes(about) and (2) gpt_clean_about(reply)
 # with learned lists of Inoperative Set and Platitudes List )
 # => When chatGPT and Bard APIs will work again, they will be sollicited to produce a best merge
 #//
@@ -32,7 +32,7 @@ from bardapi import Bard
 myToken = Mbrd.BRD_KeyAPI
 bard = Bard(token = myToken)
 #
-response = bard.get_answer("Tell me About this Brazilian Company: 'Desktop Sigmanet Comunicação Multimidia'")
+response = bard.get_answer("Tell me about this Brazilian Company: 'Desktop Sigmanet Comunicação Multimidia'")
 print(response)
 
 print(f"\n===BRD API=> <Setup> exec@: {date_stamp()}")
@@ -65,12 +65,12 @@ print(f"\n===BRD-GPT_UI_SCSV_MergingAbouts=> <Specific Routines> exec@: {date_st
 
 
 ### PRG-CIA_N4J_BRD-GPT_UI_SCSV_MergingAbouts - Modulable Routines
-# nn USR_check_boutMerge(company,about): return userResp => request USR - to check cleaned Text of the About
+# nn USR_check_boutMerge(company,about): return userResp => request USR - to check cleaned Text of the about
 
 # nn => request USR - to check Bard merge (cleaned Text) of the Abouts for company SubIndustry
 def USR_checkGPT_aboutMerge(company, aboutBRD,aboutGPT):
     queryGPT = 'Topic = Merge Text -  Below you will find to texts (About1 and About2) containing descriptions'\
-            ' about Brazilian company: ' + company + ' Can you merge About1 & About2 into a single non redundant About'\
+            ' about Brazilian company: ' + company + ' Can you merge About1 & About2 into a single non redundant about'\
             ' without missing any key point and without explicitly referencing the original text (About1 and About2)?'
     about1 = 'About1 = ' + '\'' +  aboutBRD + '\''
     about2 = 'About2 = ' + '\''+  aboutGPT +'\''
@@ -80,7 +80,7 @@ def USR_checkGPT_aboutMerge(company, aboutBRD,aboutGPT):
     print('-' * 80)
     print(textwrap.fill(promptGPT,80))
     print('-' * 80)
-    # print(f"\n===USR_check_aboutMerge=> GPT About Looks like this: \n")
+    # print(f"\n===USR_check_aboutMerge=> GPT about Looks like this: \n")
     # print(textwrap.fill(aboutGPT,100))
     prompt = 'For Company: <' + company + '> GPT manually merged Abouts you want to: \n'\
                                           '[F]ile contains new GPT text ; [I]gnore or [S]top processing: \n?'
@@ -90,11 +90,11 @@ def USR_checkGPT_aboutMerge(company, aboutBRD,aboutGPT):
     return userResp
 
 def GPT_readFile_cleanAbout(f):
-    flag, file = Mfil.openFile_Reader(f)
+    flag, file = Mfil.open_file_reader(f)
     if flag == 'False':
         print(f"\n===GPT_readFile_cleanAbout=> File <{f}> Status: {flag} => Impossible to Read - File does not exist")
     about0 = file.read()
-    about = Mgpt.GPT_cleanAbout(about0)
+    about = Mgpt.gpt_clean_about(about0)
     return flag,about
 
 print(f"\n===MergingAbouts=> <Modulable Routines> exec@: {date_stamp()}")
@@ -102,10 +102,10 @@ print(f"\n===MergingAbouts=> <Modulable Routines> exec@: {date_stamp()}")
 ### PRG-CIA_N4J_BRD_UI_SCSV_IndustryCode - Initializing InOutFiles
 
 """
-# v0 CiaImp Header
+# v0 CiaImp header
 hdrInput[0] = 'CiaCode'
 hdrInput[1] = 'CiaCNPJ'    
-hdrInput[2] = 'CiaName'    
+hdrInput[2] = 'cia_name'
 hdrInput[3] = 'SubIndustryCode'
 hdrInput[4] = 'IndustryCode'
 hdrInput[5] = 'SectorCode'
@@ -116,11 +116,11 @@ hdrInput[9] = 'Fitch'
 hdrInput[10] = 'SP'
 hdrInput[11] = 'Moody'
 hdrInput[12] = 'Group' 
-hdrInput[13] = 'About'
+hdrInput[13] = 'about'
 
-# v1 CiaImp Header
+# v1 CiaImp header
 hdrOutput[0] = 'CiaCNPJ'    
-hdrOutput[1] = 'CiaName'
+hdrOutput[1] = 'cia_name'
 hdrOutput[2] = 'SubIndustryCode'
 hdrOutput[3] = 'IndustryCode'
 hdrOutput[4] = 'SectorCode'
@@ -132,9 +132,9 @@ hdrOutput[9] = 'Group'
 hdrOutput[10] = 'aboutGPT'
 hdrOutput[11] = 'aboutBRD'
 
-# v2 CiaImp Header
+# v2 CiaImp header
 hdrOutput[0] = 'CiaCNPJ'    
-hdrOutput[1] = 'CiaName'
+hdrOutput[1] = 'cia_name'
 hdrOutput[2] = 'SubIndustryCode'
 hdrOutput[3] = 'IndustryCode'
 hdrOutput[4] = 'SectorCode'
@@ -143,26 +143,26 @@ hdrOutput[6] = 'Fitch'
 hdrOutput[7] = 'SP'
 hdrOutput[8] = 'Moody'
 hdrOutput[9] = 'Group' 
-hdrOutput[10] = 'About'
+hdrOutput[10] = 'about'
 
 
 """
 inFileName = input("FileName of Input file containing the SCSV data with two Abouts:? ")
-inFilePath = Mgv.filesDir + "/" + inFileName
+inFilePath = Mgv.FILES_DIR + "/" + inFileName
 inFile = inFilePath + '.txt'
 
-outFileName = input("FileName of Outputfile where you want to store SCSV data with one merged About? ")
-outFilePath = Mgv.filesDir + "/" + outFileName
+outFileName = input("FileName of Outputfile where you want to store SCSV data with one merged about? ")
+outFilePath = Mgv.FILES_DIR + "/" + outFileName
 outFile = outFilePath + '.txt'
 
 logFileName = input("FileName of Log file where you want to store scanning process? ")
-logFilePath = Mgv.filesDir + "/" + logFileName
+logFilePath = Mgv.FILES_DIR + "/" + logFileName
 logFile = logFilePath + '.txt'
 hdrLog = ['Records', 'LastCia']
 logRecord = [None] * 2
 
 gptFileName = input("FileName of Input file where you store GPT results of merging two Abouts? ")
-gptFilePath = Mgv.filesDir + "/" + gptFileName
+gptFilePath = Mgv.FILES_DIR + "/" + gptFileName
 gptFile = gptFilePath + '.txt'
 
 
@@ -171,27 +171,27 @@ resumeFlag = 'False'  # by default
 ciaFound = 'False'  # by default
 logFlag = 'False'
 dataFlag = 'False'
-userResp = Musr.USR_StartResume()
+userResp = Musr.usr_start_resume()
 if userResp == 'R' or userResp == 'r':
     resumeFlag = 'True'
-    logFlag, fi_log = Mfil.openFile_Reader(logFile)
+    logFlag, fi_log = Mfil.open_file_reader(logFile)
     if logFlag == 'False':
         print(f"\n===Start/Resume=> LogFile <{logFileName}> Status: {logFlag} => Not Possible to Resume")
     else:
-        # we are going to loop on Log File to read the last record to find the last Cia processed
+        # we are going to loop on Log file to read the last record to find the last Cia processed
         recordCount = 0
         foundCount = 0
         logHeaderLine = fi_log.readline()
         while line := fi_log.readline():
-            # print(f"\n===Start/Resume=> LogFile Current Line: {line})
+            # print(f"\n===Start/Resume=> LogFile Current Line: {one_line})
             logLine = line
-        # print(f"\n===Start/Resume=> LogFileLast Line: {line})
+        # print(f"\n===Start/Resume=> LogFileLast Line: {one_line})
         logList, logList_len = Mnlp.items_separator_converter(logLine, ';')
         recordCount = recordCount + int(logList[0])
         lastCiaName = logList[1]
         print(f"\n===Start/Resume=> LogFile <{logFileName}> indicates: <{lastCiaName}> as last Cia processed")
         # we need now to set inputfile to the next Cia position
-        inFlag, fi = Mfil.openFile_Reader(inFile)
+        inFlag, fi = Mfil.open_file_reader(inFile)
         inHeader = fi.readline()
         if inFlag == 'False':
             print(
@@ -202,7 +202,7 @@ if userResp == 'R' or userResp == 'r':
                 # print(f"\n===Start/Resume=> Current Cia Input Line:\n{inputLine} ")
                 inputList, inputList_len = Mnlp.items_separator_converter(inputLine, ';')
                 currentCiaName = inputList[1]
-                # print(f"\n===Start/Resume=> Current Cia Name: <{currentCiaName}> ")
+                # print(f"\n===Start/Resume=> Current Cia name: <{currentCiaName}> ")
                 if currentCiaName == lastCiaName:  # we finished scanning
                     ciaFound = 'True'
                     break
@@ -210,28 +210,28 @@ if userResp == 'R' or userResp == 'r':
 # we need now to finish initialization accordingly
 if resumeFlag == 'True':
     if dataFlag == 'True' and ciaFound == 'True':
-        outFlag, fo = Mfil.openFile_Writer(outFile)
+        outFlag, fo = Mfil.open_file_writer(outFile)
         fi_log.close()
-        logFlag, fo_log = Mfil.openFile_Writer(logFile)
+        logFlag, fo_log = Mfil.open_file_writer(logFile)
     else:
         print(f"===Start/Resume=> dataFlag: {dataFlag} or ciaFound: {ciaFound} => Impossible to Resume")
 
 else:  # we are starting from Scratch
-    inFlag, fi = Mfil.openFile_Reader(inFile)
+    inFlag, fi = Mfil.open_file_reader(inFile)
     inHeader = fi.readline()
-    print(f"\n===V1-DataBuilderUpgraded=> Initialization inputFile Header: \n{inHeader}")
-    outFlag, fo = Mfil.openFile_Writer(outFile)
+    print(f"\n===V1-DataBuilderUpgraded=> Initialization inputFile header: \n{inHeader}")
+    outFlag, fo = Mfil.open_file_writer(outFile)
     hdr_len = len(Mhdr.hdrV1ImpCia)
     hdrLine = ''
     for indx in range(hdr_len):
         hdrLine = hdrLine + Mhdr.hdrV1ImpCia[indx] + ';'
     hdrLine = hdrLine + 'aboutBRD' + '\r\n'  # no <;> on the last columns
-    print(f"\n===V1-DataBuilderUpgraded=> Initialization OutputFile Header: \n{hdrLine}")
+    print(f"\n===V1-DataBuilderUpgraded=> Initialization OutputFile header: \n{hdrLine}")
     fo.write(hdrLine)
-    wout_log, fo_log = Mfil.initializeLogFile(logFile, hdrLog)
+    wout_log, fo_log = Mfil.initialize_log_file(logFile, hdrLog)
 
 gptFileName = 'GPT_MergedText'
-gptFilePath = Mgv.filesDir + "/" + gptFileName
+gptFilePath = Mgv.FILES_DIR + "/" + gptFileName
 gptFile = gptFilePath + '.txt'
 
 print(f"\n===MergingAbouts=> <Initializing InOutFiles> exec@: {date_stamp()}")
@@ -274,13 +274,13 @@ while inputLine := fi.readline():
     print(f"===MergingAbouts=> Processing: Record# {recordCount} Cia: <{ciaName}> Industry: <{ciaIndustry}>")
     print('x' * 120)
     if ciaAboutGPT != '#X#':
-        gptAbout = Mgpt.GPT_cleanAbout(ciaAboutGPT)
+        gptAbout = Mgpt.gpt_clean_about(ciaAboutGPT)
         ciaAbout = '<CHAT-GPT>$$$:' + gptAbout
     if ciaAboutBRD != '#X#':
-        brdAbout = Mbrd.BRD_cleanReplyAbout(ciaAboutBRD)
+        brdAbout = Mbrd.brd_clean_reply_about(ciaAboutBRD)
         ciaAbout = '<BARD>$$$:' + brdAbout
-        # print(f"\n===MergingAbouts=> Combined About: \n {ciaAbout}")
-# we need know to ask USR for confirmation if there are two About
+        # print(f"\n===MergingAbouts=> Combined about: \n {ciaAbout}")
+# we need know to ask USR for confirmation if there are two about
     if userContinue == 'True':
         if ciaAboutGPT != '#X#' and ciaAboutBRD != '#X#':
             userResponse = USR_checkGPT_aboutMerge(ciaName, ciaAboutGPT,ciaAboutBRD)
@@ -301,10 +301,10 @@ while inputLine := fi.readline():
             # we are going now to write record @ output file
             outputList[10] = ciaAbout
             outputLine = writeCia_V1Record(fo, outputList)
-            # print(f"\n===MergingAbouts=> Company <{ciaName}> We have the following merged About: {outputList[10]} ")
+            # print(f"\n===MergingAbouts=> Company <{cia_name}> We have the following merged about: {outputList[10]} ")
         else:
             # we will abandon the current Cia because user asked for Stop}
-            print(f"\n===MergingAbouts=> current Cia {ciaName} About processing abandoned USR asked for Stop")
+            print(f"\n===MergingAbouts=> current Cia {ciaName} about processing abandoned USR asked for Stop")
             break
 
 # we finished looping we are going now to save the processing log
@@ -314,7 +314,7 @@ if recordCount > 1:
     logLine = ''
     logline = logLine + str(recordCount) + ';' + lastCiaName + '\r\n'
     fo_log.write(logline)
-    print(f"\n===MergingAbouts=> Processed {recordCount} records with Last record CiaName: <{lastCiaName}>")
+    print(f"\n===MergingAbouts=> Processed {recordCount} records with Last record cia_name: <{lastCiaName}>")
     # print(f"\n===MergingAbouts=> BREAKPOINT DUMMY INSTRUCTION ")
 else:
     print(f"\n===MergingAbouts=> Processed {recordCount} => No processing - No Log")
@@ -337,7 +337,7 @@ if recordCount > 1:
     logLine = ''
     logline = logLine + str(recordCount) + ';' + lastCiaName + '\r\n'
     fo_log.write(logline)
-    print(f"\n===V1-DataBuilderUpgraded=> Processed {recordCount} records with Last record CiaName: <{lastCiaName}>")
+    print(f"\n===V1-DataBuilderUpgraded=> Processed {recordCount} records with Last record cia_name: <{lastCiaName}>")
 else:
     print(f"\n===V1-DataBuilderUpgraded=> Processed {recordCount} => No processing - No Log")
 
